@@ -28,7 +28,7 @@ export function CoinCard({ coin }) {
         {coin.price_change_percentage_24h?.toFixed(2)} %
       </p>
 
-      <p>Valor de Mercado: {formatLargeNumber(coin.market_cap)}</p>
+      <p>Valor de Mercado: R$ {formatLargeNumber(coin.market_cap)}</p>
     </div>
   );
 }
