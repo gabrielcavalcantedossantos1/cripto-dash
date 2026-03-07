@@ -10,9 +10,10 @@ const App = () => {
         const response = await fetch(API_URL);
         const data = await response.json();
         setCoins(data);
+        console.log(data);
       } catch (error) {
         setError("Ocorreu um erro ao buscar as moedas");
-        console.error("Error: ",error);
+        console.error("Error: ", error);
       } finally {
         setLoading(false);
       }
@@ -24,21 +25,34 @@ const App = () => {
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  
+
   return (
     <div>
       <h1>🚀 Crypto Dash</h1>
-      {loading && <p>Carregando...</p>}
-      {error && <p>{error}</p>}
-      <ul className="coin-list">
-        {coins.map((coin) => (
-          <li key={coin.id}>
-            <p>{coin.name}</p>
-            <p>{coin.symbol}</p>
-            <p>{coin.current_price}</p>
-          </li>
-        ))}
-      </ul>
+      {loading ? (
+        <div className="spinner"></div>
+      ) : error ? (
+        <div className="error">{error}</div>
+      ) : (
+        <div className="grid">
+          {coins.map((coin) => {
+            return (
+              <div className="coin-container" key={coin.id}>
+                <div className="coin-row">
+                  <div className="coin">
+                    <img src={coin.image} alt={coin.name} />
+                    <h1>{coin.name}</h1>
+                  </div>
+                  <div className="coin-data">
+                    <p className="coin-price">${coin.current_price}</p>
+                    <p className="coin-volume">${coin.market_cap}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
