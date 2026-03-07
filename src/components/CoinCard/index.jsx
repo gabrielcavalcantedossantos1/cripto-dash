@@ -1,20 +1,6 @@
+import { formatLargeNumber } from "../utils/formatLargeNumber";
+
 export function CoinCard({ coin }) {
-  function formatLargeNumber(value) {
-    if (value >= 1_000_000_000_000) {
-      return (value / 1_000_000_000_000).toFixed(1) + " T";
-    }
-
-    if (value >= 1_000_000_000) {
-      return (value / 1_000_000_000).toFixed(1) + " B";
-    }
-
-    if (value >= 1_000_000) {
-      return (value / 1_000_000).toFixed(1) + " M";
-    }
-
-    return value.toLocaleString("pt-BR");
-  }
-
   return (
     <div className="coin-card">
       <div className="coin-header">
@@ -33,13 +19,15 @@ export function CoinCard({ coin }) {
           currency: "BRL",
         })}
       </p>
+
       <p
         className={
           coin.price_change_percentage_24h >= 0 ? "positive" : "negative"
         }
       >
-        {coin.price_change_percentage_24h.toFixed(2)} %
+        {coin.price_change_percentage_24h?.toFixed(2)} %
       </p>
+
       <p>Valor de Mercado: {formatLargeNumber(coin.market_cap)}</p>
     </div>
   );
