@@ -14,6 +14,11 @@ const App = () => {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
+    if (!API_URL) {
+      setError("API_URL não encontrada");
+      return;
+    }
+
     const fetchCoins = async () => {
       setLoading(true);
       setError(null);
