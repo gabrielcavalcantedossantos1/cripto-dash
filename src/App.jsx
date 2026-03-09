@@ -38,6 +38,13 @@ const App = () => {
     fetchCoins();
   }, [limit]);
 
+  const filteredCoins = coins.filter((coin) => {
+    return (
+      coin.name.toLowerCase().includes(filter.toLowerCase()) ||
+      coin.symbol.toLowerCase().includes(filter.toLowerCase())
+    );
+  });
+
   return (
     <div>
       <h1>🚀 Crypto Dash</h1>
@@ -54,7 +61,7 @@ const App = () => {
         <div style={{ textAlign: "center" }}>{error}</div>
       ) : (
         <main className="grid">
-          {coins.map((coin) => (
+          {filteredCoins.map((coin) => (
             <CoinCard key={coin.id} coin={coin} />
           ))}
         </main>
