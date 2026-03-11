@@ -1,34 +1,37 @@
+import { Link } from "react-router";
 import { formatLargeNumber } from "../utils/formatLargeNumber";
 
 export function CoinCard({ coin }) {
   return (
-    <div className="coin-card">
-      <div className="coin-header">
-        <img src={coin.image} alt={coin.name} className="coin-image" />
+    <Link to={`moeda-detalhes/${coin.id}`}>
+      <div className="coin-card">
+        <div className="coin-header">
+          <img src={coin.image} alt={coin.name} className="coin-image" />
 
-        <div>
-          <h2>{coin.name}</h2>
-          <p className="symbol">{coin.symbol.toUpperCase()}</p>
+          <div>
+            <h2>{coin.name}</h2>
+            <p className="symbol">{coin.symbol.toUpperCase()}</p>
+          </div>
         </div>
+
+        <p>
+          Preço:{" "}
+          {coin.current_price.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}
+        </p>
+
+        <p
+          className={
+            coin.price_change_percentage_24h >= 0 ? "positive" : "negative"
+          }
+        >
+          {coin.price_change_percentage_24h?.toFixed(2)} %
+        </p>
+
+        <p>Valor de Mercado: R$ {formatLargeNumber(coin.market_cap)}</p>
       </div>
-
-      <p>
-        Preço:{" "}
-        {coin.current_price.toLocaleString("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-        })}
-      </p>
-
-      <p
-        className={
-          coin.price_change_percentage_24h >= 0 ? "positive" : "negative"
-        }
-      >
-        {coin.price_change_percentage_24h?.toFixed(2)} %
-      </p>
-
-      <p>Valor de Mercado: R$ {formatLargeNumber(coin.market_cap)}</p>
-    </div>
+    </Link>
   );
 }
