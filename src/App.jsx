@@ -2,11 +2,12 @@ import { useEffect } from "react";
 
 //paginas
 import { Home } from "./page/home";
+import { About } from "./page/about";
+import { NotFound } from "./page/notFound";
+import { CoinsDetails } from "./page/coinsDetails";
 
 //routes
 import { Routes, Route } from "react-router";
-import { About } from "./page/about";
-import { NotFound } from "./page/notFound";
 
 //context
 import { useMyContext } from "./context/context";
@@ -55,6 +56,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/moeda-detalhes/:id" element={<CoinsDetails />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
