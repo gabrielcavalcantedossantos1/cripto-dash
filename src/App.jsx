@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 //paginas
 import { Home } from "./page/home";
@@ -8,11 +8,13 @@ import { Routes, Route } from "react-router";
 
 //context
 import { useMyContext } from "./context/context";
+import { About } from "./page/about";
+import { Header } from "./components/header";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const App = () => {
-  const {setLoading, setError, setCoins, limit} = useMyContext();
+  const { setLoading, setCoins, setError, limit } = useMyContext();
 
   useEffect(() => {
     if (!API_URL) {
@@ -45,9 +47,13 @@ const App = () => {
   }, [limit]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </>
   );
 };
 
