@@ -5,10 +5,13 @@ import { Home } from "./page/home";
 
 //routes
 import { Routes, Route } from "react-router";
+import { About } from "./page/about";
+import { NotFound } from "./page/notFound";
 
 //context
 import { useMyContext } from "./context/context";
-import { About } from "./page/about";
+
+//components
 import { Header } from "./components/header";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -52,6 +55,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
