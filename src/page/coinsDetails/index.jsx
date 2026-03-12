@@ -26,6 +26,7 @@ export function CoinsDetails() {
 
         const data = await response.json();
         setCoin(data);
+        console.log(data);
       } catch (error) {
         setError("Ocorreu um erro ao buscar as moedas");
         console.error("Error:", error);
@@ -174,6 +175,40 @@ export function CoinsDetails() {
                 ? new Date(coin.last_updated).toLocaleString("pt-BR")
                 : "N/A"}
             </h4>
+
+            <div className="coin-details-links">
+              {coin.links.homepage[0] && (
+                <p>
+                  🌐{" "}
+                  <a
+                    href={coin.links.homepage}
+                    target="_blank"
+                    rel="nooppener noreferrer"
+                  >
+                    Website
+                  </a>{" "}
+                </p>
+              )}
+
+              {coin.links.blockchain_site[0] && (
+                <p>
+                  🧩{" "}
+                  <a
+                    href={coin.links.blockchain_site}
+                    target="_blank"
+                    rel="nooppener noreferrer"
+                  >
+                    Blockchain Site
+                  </a>{" "}
+                </p>
+              )}
+
+              {coin.categories.length > 0 && (
+                <p>
+                  📚 <strong>Categoria</strong>: {coin.categories.join(", ")}
+                </p>
+              )}
+            </div>
           </div>
         </>
       )}
