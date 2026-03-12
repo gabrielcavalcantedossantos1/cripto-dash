@@ -324,3 +324,30 @@ a {
   transform: translateY(0);
   opacity: 0.9;
 }
+.days-select {
+  margin-left: 10px;
+  padding: 6px 10px;
+  font-size: 14px;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+
+  background-color: white;
+  color: #333;
+
+  cursor: pointer;
+
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.days-select:hover {
+  border-color: #007bff;
+}
+
+.days-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
