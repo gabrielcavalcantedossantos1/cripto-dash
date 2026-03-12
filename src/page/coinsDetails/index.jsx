@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router";
 import { useEffect, useState } from "react";
 
 import { formatLargeNumber } from "../../components/utils/formatLargeNumber";
+import { CoinChart } from "../../components/coinChart";
 
 const API_URL = import.meta.env.VITE_COIN_API_URL;
 
@@ -26,7 +27,6 @@ export function CoinsDetails() {
 
         const data = await response.json();
         setCoin(data);
-        console.log(data);
       } catch (error) {
         setError("Ocorreu um erro ao buscar as moedas");
         console.error("Error:", error);
@@ -175,6 +175,8 @@ export function CoinsDetails() {
                 ? new Date(coin.last_updated).toLocaleString("pt-BR")
                 : "N/A"}
             </h4>
+
+            <CoinChart coinId={coin.id} />
 
             <div className="coin-details-links">
               {coin.links.homepage[0] && (
