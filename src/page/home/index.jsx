@@ -1,4 +1,4 @@
-import { CoinCard } from "../../components/coinCard";
+import { CoinCard } from "../../components/CoinCard";
 import { LimitSelector } from "../../components/limitSelector";
 import { FilterInput } from "../../components/filterInput";
 import { SortSelector } from "../../components/sortSelector";
