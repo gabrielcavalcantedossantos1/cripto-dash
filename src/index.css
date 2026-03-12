@@ -300,3 +300,27 @@ a {
     transform: rotate(360deg);
   }
 }
+.coin-button {
+  padding: 10px 24px;
+  margin: 20px 0;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.coin-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(135deg, #4338ca, #4f46e5);
+}
+
+.coin-button:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
