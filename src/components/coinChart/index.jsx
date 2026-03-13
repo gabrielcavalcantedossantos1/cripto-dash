@@ -60,7 +60,24 @@ export function CoinChart({ coinId }) {
               data: prices,
               fill: true,
               borderColor: "#007bff",
-              backgroundColor: "rgba(0,123,255,0.1)",
+              backgroundColor: (context) => {
+                const chart = context.chart;
+                const { ctx, chartArea } = chart;
+
+                if (!chartArea) return null;
+
+                const gradient = ctx.createLinearGradient(
+                  0,
+                  chartArea.top,
+                  0,
+                  chartArea.bottom,
+                );
+
+                gradient.addColorStop(0, "rgba(0,123,255,0.4)");
+                gradient.addColorStop(1, "rgba(0,123,255,0)");
+
+                return gradient;
+              },
               pointRadius: 0,
               tension: 0.3,
             },
@@ -81,29 +98,23 @@ export function CoinChart({ coinId }) {
   if (error) return <p>{error}</p>;
   if (!chartData) return null;
 
-  const options = [
-    { label: "1 dia", value: 1 },
-    { label: "3 dias", value: 3 },
-    { label: "7 dias", value: 7 },
-    { label: "15 dias", value: 15 },
-    { label: "30 dias", value: 30 },
-    { label: "60 dias", value: 60 },
-    { label: "90 dias", value: 90 },
-    { label: "180 dias", value: 180 },
-    { label: "365 dias", value: 365 },
-  ];
-
   return (
     <div style={{ marginTop: "30px", width: "100%", height: "400px" }}>
-      <label htmlFor="dias">Mudança de dias para o grafico</label>{" "}
-      <select id="dias" onChange={(e) => setDays(Number(e.target.value))} className="days-select">
-        {options.map((option) => (
+      <label htmlFor="dias" style={{ marginRight: "10px" }}>
+        Período do gráfico
+      </label>{" "}
+      <select
+        value={days}
+        id="dias"
+        onChange={(e) => setDays(Number(e.target.value))}
+        className="days-select"
+      >
+        {PERIOD_OPTIONS.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
       </select>
-
       <Line
         data={chartData}
         options={{
@@ -116,7 +127,7 @@ export function CoinChart({ coinId }) {
             x: {
               type: "time",
               time: {
-                unit: "day",
+                unit: days === 1 ? "hour" : "day",
               },
               ticks: {
                 autoSkip: true,
@@ -138,3 +149,14 @@ export function CoinChart({ coinId }) {
     </div>
   );
 }
+const PERIOD_OPTIONS = [
+  { label: "1 dia", value: 1 },
+  { label: "3 dias", value: 3 },
+  { label: "7 dias", value: 7 },
+  { label: "15 dias", value: 15 },
+  { label: "30 dias", value: 30 },
+  { label: "60 dias", value: 60 },
+  { label: "90 dias", value: 90 },
+  { label: "180 dias", value: 180 },
+  { label: "365 dias", value: 365 },
+];
